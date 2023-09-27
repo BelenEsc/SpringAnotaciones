@@ -1,14 +1,32 @@
 package belenaprende.com.pruebasanotaciones;
 
-import javax.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Autowired;
 import javax.annotation.PreDestroy;
 
 import org.springframework.stereotype.Component;
 
-@Component("IDDelBean") // gracias a esta anotacion en esta clase, spring ya sabe que se puede crean un
-						// bean de esta clase
+//@Component("IDDelBean") // gracias a esta anotacion en esta clase, spring ya sabe que se puede crean un
+// bean de esta clase
 //@Scope("prototype")
+			// que hacer referencia a la clase de la que se queire crear un bean.
+
 public class ComercialExperimentado implements IEmpleado {
+
+	@Autowired
+	private ICreacionInformeFinanciero informeTrimestral;
+
+	/*
+	 * @Autowired // Spring sin q se vea, es buscar en todo el proyecto a ver si hay
+	 * alguna clase // que implemente la clase ICreacionInfFinan... si la encuentra
+	 * crea un bean de // esa clase public
+	 * ComercialExperimentado(ICreacionInformeFinanciero informeTrimestral) {
+	 * this.informeTrimestral = informeTrimestral; }
+	 */
+
+	/*
+	 * @Autowired public void setInformeTrimestral(ICreacionInformeFinanciero
+	 * informeTrimestral) { this.informeTrimestral = informeTrimestral; }
+	 */
 
 	@Override
 	public String getTareas() {
@@ -19,6 +37,7 @@ public class ComercialExperimentado implements IEmpleado {
 	@Override
 	public String getInformes() {
 		// TODO Auto-generated method stub
+		return informeTrimestral.getInformeFinanciero();
 		return "informe generado por el vendedor";
 	}
 	
